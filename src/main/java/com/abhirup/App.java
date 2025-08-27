@@ -1,5 +1,9 @@
 package com.abhirup;
 
+import com.abhirup.decorator.Logger;
+import com.abhirup.decorator.PrefixLoggerDecorator;
+import com.abhirup.decorator.SimpleLoggerImp;
+import com.abhirup.decorator.TimestampLoggerDecorator;
 import com.abhirup.observer.AltitudeDisplay;
 import com.abhirup.observer.FlightData;
 import com.abhirup.observer.SpeedometerDisplay;
@@ -10,7 +14,8 @@ import com.abhirup.strategy.UpiPayment;
 public final class App {
     public static void main(String[] args) {
         // strategy();
-        observer();
+        // observer();
+        decotator();
     }
 
     private static void strategy() {
@@ -38,5 +43,26 @@ public final class App {
 
         fd.setAltitude(201);
         fd.setSpeed(100);
+    }
+
+    private static void decotator() {
+        // Logger logger = new SimpleLoggerImp();
+        
+        // // adding timestamp decorator
+        // logger = new TimestampLoggerDecorator(logger);
+
+        // // adding prefix decorator
+        // logger = new PrefixLoggerDecorator(logger, "Hello");
+
+        // logger.printMessage("Abhirup Naha");
+
+        Logger logger = new TimestampLoggerDecorator(
+            new PrefixLoggerDecorator(
+                new SimpleLoggerImp(), 
+                "hello"
+            )
+        );
+
+        logger.printMessage("hello world");
     }
 }
